@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Contract implements Serializable {
     private String id;
-    private String hash;
+    private String uuid;
 
     public Contract() {
     }
 
-    public Contract(String id, String hash) {
+    public Contract(String id, String uuid) {
         this.id = id;
-        this.hash = hash;
+        this.uuid = uuid;
     }
 
     public String getId() {
@@ -22,11 +22,11 @@ public class Contract implements Serializable {
         this.id = id;
     }
 
-    public String getHash() {
-        return hash;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setHash(String hash) {
-        this.hash = hash;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

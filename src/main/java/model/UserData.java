@@ -9,7 +9,9 @@ public class UserData implements Serializable {
     private String auth_token;
     private Wallet wallet;
     private Contract contract;
-
+    private boolean isMint=false;
+    private boolean isSend=false;
+    private boolean isReceive=false;
     public UserData() {
     }
 
@@ -43,5 +45,29 @@ public class UserData implements Serializable {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public boolean isMint() {
+        return isMint;
+    }
+
+    public void setMint(boolean mint) {
+        isMint = mint;
+    }
+
+    public boolean isSend() {
+        return isSend;
+    }
+
+    public void setSend(boolean send) {
+        isSend = send;
+    }
+
+    public boolean isReceive() {
+        return isReceive;
+    }
+
+    public void setReceive(boolean receive) {
+        isReceive = receive;
     }
 }

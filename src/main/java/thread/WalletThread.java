@@ -22,21 +22,42 @@ public class WalletThread extends Thread implements Runnable{
     @Override
     public void run(){
         try {
-            System.out.println(email+" fetch wallet");
-            String response = RequestUtil.asyncRequest(requestBody);
-            HashMap<String,Object> data = CommonUtils.convertResponseToHashMap(response);
-            String address = (String) data.get("address");
-            String private_key = (String) data.get("private_key");
-            String id = (String) data.get("id");
-            Wallet wallet = new Wallet(id,address,private_key);
-            synchronized (DataService.data) {
-                UserData userDataHash = DataService.data.get(email);
-                userDataHash.setWallet(wallet);
-                data.put(email,userDataHash);
-            }
-            System.out.println(email+" done fetch wallet");
-        } catch (IOException e) {
+            String response="";
+            int count =0;
+            do{
+                response = RequestUtil.asyncRequest(requestBody);
+                if (response.length()==0){
+                    count++;
+                    Thread.sleep(1500);
+                    if (count == 3) {
+                        break;
+                    }
+                }
+                else{
+                    HashMap<String,Object> data = CommonUtils.convertResponseToHashMap(response);
+                    String address = (String) data.get("address");
+                    System.out.println(address);
+                    String private_key = (String) data.get("private_key");
+                    String id = (String) data.get("id");
+                    Wallet wallet = new Wallet(id,address,private_key);
+                    synchronized (DataService.data) {
+                        UserData userDataHash = DataService.data.get(email);
+                        userDataHash.setWallet(wallet);
+                        DataService.data.put(email,userDataHash);
+                    }
+                }
+            }while(response.length()==0);
+
+
+        }
+        catch (NullPointerException e) {
+            this.interrupt();
             System.out.println(e.getMessage());
+        }catch (IOException e) {
+            DataService.missAccount.add(email);
+            System.out.println(e.getMessage());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

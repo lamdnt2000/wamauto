@@ -5,15 +5,17 @@ import util.CommonUtils;
 
 
 import java.io.Serializable;
+import java.net.CookieManager;
 
 public class RequestBody implements Serializable {
     private String url;
     private String method;
     private Object data;
-    private String userAgent="Mozilla/5.0 (Linux; Android 7.1.2; G011A Build/N2G48H; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.70 Mobile Safari/537.36";
+    private String userAgent="Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.125 Mobile Safari/537.36";
     private String xapiKey;
     public String xrequestWith = "io.numbersprotocol.capturelite";
-    private String token="";
+    private String token;
+    private String cookieManager;
     public RequestBody() {
 
     }
@@ -73,5 +75,21 @@ public class RequestBody implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getXrequestWith() {
+        return xrequestWith;
+    }
+
+    public void setXrequestWith(String xrequestWith) {
+        this.xrequestWith = xrequestWith;
+    }
+
+    public String getCookieManager() {
+        return cookieManager;
+    }
+
+    public void setCookieManager(String cookieManager) {
+        this.cookieManager = cookieManager;
     }
 }
