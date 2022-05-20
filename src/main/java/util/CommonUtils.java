@@ -63,4 +63,12 @@ public class CommonUtils {
         return false;
 
     }
+
+    public static WebElement checkValidElement(WebDriver driver, String xpath){
+        List<WebElement> elements = driver.findElements(By.xpath(xpath));
+        if (elements.size()>0){
+            return elements.get(0);
+        }
+        return null;
+    }
 }
