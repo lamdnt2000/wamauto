@@ -21,7 +21,7 @@ public class Demo {
 
         ScheduledExecutorService fixedPool =
                 Executors.newScheduledThreadPool(2);
-        for (int i=1;i<101;i++) {
+        for (int i=126;i<201;i++) {
             String email = "conkute"+i+"@scpulse.com";
             fixedPool.schedule(new SeleniumThread("https://play.wam.app/",email), 10, TimeUnit.SECONDS);
         }
